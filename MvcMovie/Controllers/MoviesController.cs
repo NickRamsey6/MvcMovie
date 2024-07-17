@@ -13,7 +13,8 @@ namespace MvcMovie.Controllers
     public class MoviesController : Controller
     {
         private readonly MvcMovieContext _context;
-
+        // Dependency Injection injects the dataabase context into this controller
+        // That context is used in each of the CRUD methods
         public MoviesController(MvcMovieContext context)
         {
             _context = context;
