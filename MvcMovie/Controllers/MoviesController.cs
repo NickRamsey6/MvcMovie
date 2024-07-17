@@ -91,6 +91,7 @@ namespace MvcMovie.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
+            // Checks against the validation rules set in the Model class
             if (ModelState.IsValid)
             {
                 _context.Add(movie);
