@@ -1,16 +1,19 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
+
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\HelloWorld\Welcome.cshtml" />
   </ItemGroup>
+
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Views\HelloWorld\Welcome.cshtml" />
   </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.7">
@@ -19,7 +22,5 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.3" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Telerik.UI.for.AspNet.Core" Version="2024.2.514" />
-  </ItemGroup>
+
 </Project>
