@@ -193,30 +193,36 @@ namespace MvcMovie.Controllers
         }
 
 
-        private List<Movie> movies = new List<Movie> {
-            new Movie { Title = "when harry met sally", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
-            new Movie { Title = "when harry met sally 2", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
-            new Movie { Title = "when harry met sally 3", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
-            new Movie { Title = "when harry met sally 4", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" }
-        };
-
         public ActionResult MoviesRead([DataSourceRequest]DataSourceRequest request)
         {
             return Json(_context.Movie.ToDataSourceResult(request));
         }
 
-        public JsonResult Grid_Read([DataSourceRequest] DataSourceRequest request)
+
+        // STILL working
+        //public async Task<IActionResult> MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(movie);
+        //        await _context.SaveChangesAsync();
+
+        //    }
+        //    return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
+        //}
+
+        // This will save the new movie in the db but the grid table requires a refresh to displayed the new record
+        public virtual JsonResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
-            return Json(movies.ToDataSourceResult(request));
+            if (ModelState.IsValid)
+            {
+                //product.ProductID = ++products.LastOrDefault().ProductID;
+                _context.Add(movie);
+                _context.SaveChanges();
+
+            }
+            return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
-        //public async Task<IActionResult> Grid_Read()
-        //{
-        //    var movies = from m in _context.Movie
-        //                 select m;
-
-        //    await movies.ToListAsync();
-        //    return View(movies);
-        //}
     }
 }

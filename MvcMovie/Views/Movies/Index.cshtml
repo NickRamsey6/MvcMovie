@@ -86,21 +86,17 @@
             columns.Bound(c => c.Genre);
             columns.Bound(c => c.Price);
             columns.Bound(c => c.Rating);
+            columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
         })
         .ToolBar(toolbar => toolbar.Create())
+        .Editable(editable => editable.Mode(GridEditMode.InLine))
         .Pageable()
         .Sortable()
-        .Scrollable()
         .DataSource(dataSource => dataSource
         .Ajax()
-        .PageSize(5)
+        .PageSize(20)
         .Read(read => read.Action("MoviesRead", "Movies"))
+        .Create(update => update.Action("MovieCreate", "Movies"))
         )
     )
-<script>
 
-    function onEdit(e) {
-        var container = e.container;
-        container.css("background-color", "#90EE90");
-    }
-</script>
