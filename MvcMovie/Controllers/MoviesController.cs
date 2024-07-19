@@ -197,8 +197,13 @@ namespace MvcMovie.Controllers
             new Movie { Title = "when harry met sally", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
             new Movie { Title = "when harry met sally 2", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
             new Movie { Title = "when harry met sally 3", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
-           new Movie { Title = "when harry met sally 4", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" }
+            new Movie { Title = "when harry met sally 4", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" }
         };
+
+        public ActionResult MoviesRead([DataSourceRequest]DataSourceRequest request)
+        {
+            return Json(_context.Movie.ToDataSourceResult(request));
+        }
 
         public JsonResult Grid_Read([DataSourceRequest] DataSourceRequest request)
         {

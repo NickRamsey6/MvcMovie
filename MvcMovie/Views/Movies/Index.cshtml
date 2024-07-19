@@ -93,8 +93,8 @@
         .Scrollable()
         .DataSource(dataSource => dataSource
         .Ajax()
-        .PageSize(10)
-        .Read(read => read.Action("Grid_Read", "Movies"))
+        .PageSize(5)
+        .Read(read => read.Action("MoviesRead", "Movies"))
         )
     )
 <script>
