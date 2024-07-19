@@ -1,4 +1,5 @@
-﻿@{
+﻿@using Kendo.Mvc.UI;
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -6,3 +7,42 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<p class="title">Products</p>
+@(Html.Kendo().Grid<MvcMovie.Models.ProductViewModel>()
+    .Name("grid")
+    .Columns(columns =>
+    {
+        columns.Bound(p => p.ProductName);
+        columns.Bound(p => p.UnitPrice).Width(120);
+        columns.Bound(p => p.UnitsInStock).Width(120);
+        columns.Bound(p => p.Discontinued).Width(120);
+        columns.Command(command => { command.Edit(); command.Destroy(); }).Width(250);
+    })
+    .ToolBar(toolbar => toolbar.Create())
+    .Editable(editable => editable.Mode(GridEditMode.InLine))
+    .Pageable()
+    .Sortable()
+    .Scrollable()
+    .HtmlAttributes(new { style = "height:500px;" })
+    .Events(events => events
+        .Edit("onEdit")
+    )
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(10)
+        .Model(model => model.Id(p => p.ProductID))
+        .Read(read => read.Action("Grid_Read", "Home"))
+        .Create(update => update.Action("Grid_Create", "Home"))
+        .Update(update => update.Action("Grid_Update", "Home"))
+        .Destroy(update => update.Action("Grid_Destroy", "Home"))
+    )
+)
+
+    <script>
+
+        function onEdit(e) {
+            var container = e.container;
+            container.css("background-color", "#90EE90");
+        }
+    </script>

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -189,5 +191,27 @@ namespace MvcMovie.Controllers
         {
             return _context.Movie.Any(e => e.Id == id);
         }
+
+
+        private List<Movie> movies = new List<Movie> {
+            new Movie { Title = "when harry met sally", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
+            new Movie { Title = "when harry met sally 2", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
+            new Movie { Title = "when harry met sally 3", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" },
+           new Movie { Title = "when harry met sally 4", ReleaseDate = DateTime.Now, Genre = "RomCom", Price = 7.99M, Rating = "R" }
+        };
+
+        public JsonResult Grid_Read([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(movies.ToDataSourceResult(request));
+        }
+
+        //public async Task<IActionResult> Grid_Read()
+        //{
+        //    var movies = from m in _context.Movie
+        //                 select m;
+
+        //    await movies.ToListAsync();
+        //    return View(movies);
+        //}
     }
 }
