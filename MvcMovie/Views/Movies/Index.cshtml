@@ -96,7 +96,13 @@
         .Ajax()
         .PageSize(20)
         .Read(read => read.Action("MoviesRead", "Movies"))
-        .Create(update => update.Action("MovieCreate", "Movies"))
+        .Create(create => create.Action("MovieCreate", "Movies"))
+        .Model(m =>
+        {
+            m.Id(id => id.Id);
+            m.Field(f => f.Id).Editable(false);
+        })
         )
     )
+
 

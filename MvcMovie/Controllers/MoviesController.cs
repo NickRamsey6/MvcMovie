@@ -91,7 +91,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Create([Bind("id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             // Checks against the validation rules set in the Model class
             if (ModelState.IsValid)
@@ -198,25 +198,10 @@ namespace MvcMovie.Controllers
             return Json(_context.Movie.ToDataSourceResult(request));
         }
 
-
-        // STILL working
-        //public async Task<IActionResult> MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(movie);
-        //        await _context.SaveChangesAsync();
-
-        //    }
-        //    return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
-        //}
-
-        // This will save the new movie in the db but the grid table requires a refresh to displayed the new record
         public virtual JsonResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
-                //product.ProductID = ++products.LastOrDefault().ProductID;
                 _context.Add(movie);
                 _context.SaveChanges();
 
