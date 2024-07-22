@@ -98,6 +98,7 @@
         .Read(read => read.Action("MoviesRead", "Movies"))
         .Create(create => create.Action("MovieCreate", "Movies"))
         .Update(update => update.Action("MovieEdit", "Movies"))
+        .Destroy(destroy => destroy.Action("MovieDelete", "Movies"))
         .Model(m =>
         {
             m.Id(id => id.Id);

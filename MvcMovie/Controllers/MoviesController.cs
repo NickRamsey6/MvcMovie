@@ -198,7 +198,7 @@ namespace MvcMovie.Controllers
             return Json(_context.Movie.ToDataSourceResult(request));
         }
 
-        public virtual JsonResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -214,6 +214,16 @@ namespace MvcMovie.Controllers
             if (movie != null && ModelState.IsValid)
             {
                 _context.Update(movie);
+                _context.SaveChanges();
+            }
+            return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
+        }
+
+        public ActionResult MovieDelete([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Remove(movie);
                 _context.SaveChanges();
             }
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
