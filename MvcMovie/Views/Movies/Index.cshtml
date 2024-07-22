@@ -97,6 +97,7 @@
         .PageSize(20)
         .Read(read => read.Action("MoviesRead", "Movies"))
         .Create(create => create.Action("MovieCreate", "Movies"))
+        .Update(update => update.Action("MovieEdit", "Movies"))
         .Model(m =>
         {
             m.Id(id => id.Id);

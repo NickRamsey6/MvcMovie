@@ -209,5 +209,15 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
+        public ActionResult MovieEdit([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        {
+            if (movie != null && ModelState.IsValid)
+            {
+                _context.Update(movie);
+                _context.SaveChanges();
+            }
+            return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
+        }
+
     }
 }
