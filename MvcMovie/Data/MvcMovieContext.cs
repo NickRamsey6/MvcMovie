@@ -16,5 +16,6 @@ namespace MvcMovie.Data
 
         public DbSet<MvcMovie.Models.Movie> Movie { get; set; } = default!;
         public DbSet<MvcMovie.Models.Actor> Actor { get; set; } = default!;
+        public DbSet<MvcMovie.Models.Director> Director { get; set; } = default!;
     }
 }

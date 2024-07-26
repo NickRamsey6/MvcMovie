@@ -1,0 +1,6 @@
+﻿@(Html.Kendo().DropDownList()
+    .Name("Director")
+    .DataValueField("DirectorId")
+    .DataTextField("DirectorName")
+    .BindTo((System.Collections.IEnumerable)ViewData["directors"])
+)

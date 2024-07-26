@@ -58,6 +58,9 @@ namespace MvcMovie.Controllers
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
                 Movies = await movies.ToListAsync()
             };
+
+            ViewData["directors"] = _context.Director;
+            ViewData["defaultDirector"] = _context.Director.First();
             
             return View(movieGenreVM);
         }
@@ -198,7 +201,7 @@ namespace MvcMovie.Controllers
             return Json(_context.Movie.ToDataSourceResult(request));
         }
 
-        public ActionResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -209,7 +212,7 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
-        public ActionResult MovieEdit([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult MovieEdit([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
         {
             if (movie != null && ModelState.IsValid)
             {
@@ -219,7 +222,7 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
-        public ActionResult MovieDelete([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult MovieDelete([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
         {
             if (ModelState.IsValid)
             {

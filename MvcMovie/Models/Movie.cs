@@ -30,4 +30,7 @@ public class Movie
     [Required]
     [StringLength(5)]
     public string? Rating { get; set; }
+
+    [UIHint("DirectorEditor")]
+    public Director? Director { get; set; }
 }
