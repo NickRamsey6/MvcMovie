@@ -94,7 +94,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Create([Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             // Checks against the validation rules set in the Model class
             if (ModelState.IsValid)
@@ -127,7 +127,7 @@ namespace MvcMovie.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (id != movie.MovieId)
             {
@@ -201,7 +201,7 @@ namespace MvcMovie.Controllers
             return Json(_context.Movie.ToDataSourceResult(request));
         }
 
-        public ActionResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
+        public ActionResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,DirectorId")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -212,7 +212,7 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
-        public ActionResult MovieEdit([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
+        public ActionResult MovieEdit([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,DirectorId")] Movie movie)
         {
             if (movie != null && ModelState.IsValid)
             {
@@ -222,7 +222,7 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
-        public ActionResult MovieDelete([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,Director")] Movie movie)
+        public ActionResult MovieDelete([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating,DirectorId")] Movie movie)
         {
             if (ModelState.IsValid)
             {

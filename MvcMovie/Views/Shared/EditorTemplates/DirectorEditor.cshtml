@@ -1,6 +1,11 @@
-﻿@(Html.Kendo().DropDownList()
+﻿@(
+Html.Kendo().DropDownList()
     .Name("Director")
     .DataValueField("DirectorId")
     .DataTextField("DirectorName")
     .BindTo((System.Collections.IEnumerable)ViewData["directors"])
+    .DataSource(dataSource => dataSource
+        .Ajax()
+        .Read(read => read.Action("MovieEdit", "Movies"))
+    )
 )

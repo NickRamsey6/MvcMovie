@@ -31,6 +31,7 @@ public class Movie
     [StringLength(5)]
     public string? Rating { get; set; }
 
+    [Display(Name = "Director")]
     [UIHint("DirectorEditor")]
-    public Director? Director { get; set; }
+    public int? DirectorId { get; set; }
 }
