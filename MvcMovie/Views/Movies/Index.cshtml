@@ -69,9 +69,9 @@
                     @Html.DisplayFor(modelItem => item.Rating)
                 </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.MovieId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.MovieId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.MovieId">Delete</a>
             </td>
         </tr>
 }
@@ -115,8 +115,8 @@ Html.Kendo().Grid<MvcMovie.Models.Movie>()
         .Destroy(destroy => destroy.Action("MovieDelete", "Movies"))
         .Model(m =>
         {
-            m.Id(id => id.Id);
-            m.Field(f => f.Id).Editable(false);
+            m.Id(id => id.MovieId);
+            m.Field(f => f.MovieId).Editable(false);
         })
         )
     )

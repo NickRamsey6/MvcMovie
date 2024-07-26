@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Kendo.Mvc.Extensions;
+﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
 using MvcMovie.Models;
+using System.Linq;
+
 
 namespace MvcMovie.Controllers
 {
-    public class MoviesController : Controller
+    public class MoviesExpandedController : Controller
     {
+
         private readonly MvcMovieContext _context;
         // Dependency Injection injects the dataabase context into this controller
         // That context is used in each of the CRUD methods
-        public MoviesController(MvcMovieContext context)
+        public MoviesExpandedController(MvcMovieContext context)
         {
             _context = context;
         }
@@ -58,7 +57,7 @@ namespace MvcMovie.Controllers
                 Genres = new SelectList(await genreQuery.Distinct().ToListAsync()),
                 Movies = await movies.ToListAsync()
             };
-            
+
             return View(movieGenreVM);
         }
 
@@ -193,12 +192,12 @@ namespace MvcMovie.Controllers
         }
 
 
-        public ActionResult MoviesRead([DataSourceRequest]DataSourceRequest request)
+        public ActionResult MoviesRead([DataSourceRequest] DataSourceRequest request)
         {
             return Json(_context.Movie.ToDataSourceResult(request));
         }
 
-        public ActionResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult MovieCreate([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -209,7 +208,7 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
-        public ActionResult MovieEdit([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult MovieEdit([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (movie != null && ModelState.IsValid)
             {
@@ -219,7 +218,7 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
-        public ActionResult MovieDelete([DataSourceRequest] DataSourceRequest request, [Bind("MovieId,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public ActionResult MovieDelete([DataSourceRequest] DataSourceRequest request, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -229,5 +228,16 @@ namespace MvcMovie.Controllers
             return Json(new[] { movie }.ToDataSourceResult(request, ModelState));
         }
 
+        public ActionResult DetailTemplate_HierarchyBinding_Movies([DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(_context.Movie.ToDataSourceResult(request));
+        }
+
+        public ActionResult DetailTemplate_HierarchyBinding_Actors(int movieId, [DataSourceRequest] DataSourceRequest request)
+        {
+            return Json(_context.Actor
+                .Where(actor => actor.MovieId == movieId)
+                .ToDataSourceResult(request));
+        }
     }
 }

@@ -54,6 +54,40 @@ public class SeedData
                 }
             );
             context.SaveChanges();
+
+
+            // Look for Actors.
+            if (context.Actor.Any())
+            {
+                return; // DB has been seeded
+            }
+            context.Actor.AddRange(
+                new Actor
+                {
+                    FName = "Billy",
+                    LName = "Crystal",
+                    MovieId = 61,
+                },
+                new Actor
+                {
+                    FName = "Bill",
+                    LName = "Murray",
+                    MovieId = 62,
+                },
+                new Actor
+                {
+                    FName = "Harold",
+                    LName = "Ramis",
+                    MovieId = 63,
+                },
+                new Actor
+                {
+                    FName = "John",
+                    LName = "Wayne",
+                    MovieId = 64,
+                }
+            );
+            context.SaveChanges();
         }
     }
 }
