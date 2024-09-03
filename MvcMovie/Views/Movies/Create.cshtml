@@ -1,10 +1,18 @@
 ﻿@model MvcMovie.Models.Movie
-
+@using Kendo.Mvc.UI
 @{
     ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
+
+<h4>Basic Kendo button</h4>
+<p>
+    @(Html.Kendo().Button()
+        .Name("primaryTextButton")
+        .ThemeColor(ThemeColor.Primary)
+        .Content("My New Kendo Button"))
+</p>
 
 <h4>Movie</h4>
 <hr />
@@ -44,10 +52,29 @@
     </div>
 </div>
 
+<div id="validation-success"></div>
+@(Html.Kendo().Form<MvcMovie.Models.Movie>()
+        .Name("formExample")
+        .Items(items =>
+        {
+            items.AddGroup()
+                .Label("Registration Form")
+                .Items(i =>
+                {
+                    i.Add()
+                         .Field(f => f.Title)
+                         .Label(l => l.Text("Title:"));
+                    i.Add()
+                        .Field(f => f.Genre)
+                        .Label(l => l.Text("Genre:"));
+                });
+        })
+    )
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
+@* @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+} *@

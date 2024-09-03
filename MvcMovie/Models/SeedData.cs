@@ -54,6 +54,34 @@ public class SeedData
                 }
             );
             context.SaveChanges();
+
+            context.Photo.AddRange(
+                new Photo
+                {
+                    Name = "When Harry Met Sally Poster",
+                    Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\whms.jpg",
+                    Description = "The movie poster for When Harry Met Sally"
+                },
+                new Photo
+                {
+                    Name = "Ghostbusters Poster",
+                    Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\gb.jpg",
+                    Description = "The movie poster for Ghostbusters"
+                },
+                new Photo
+                {
+                    Name = "Ghostbusters II Poster",
+                    Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\gb2.jpg",
+                    Description = "The movie poster for Ghostbusters II"
+                },
+                new Photo
+                {
+                    Name = "Rio Bravo Poster",
+                    Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\rb.jpg",
+                    Description = "The movie poster for Rio Bravo"
+                }
+            );
+            context.SaveChanges();
         }
     }
 }

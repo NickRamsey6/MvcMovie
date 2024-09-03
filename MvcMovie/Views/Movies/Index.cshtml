@@ -83,7 +83,7 @@ Html.Kendo().Grid<MvcMovie.Models.Movie>()
         .Columns(columns =>
         {
             columns.Bound(c => c.Title);
-            columns.Bound(c => c.ReleaseDate);
+            columns.Bound(c => c.ReleaseDate).MinScreenWidth(1000);
             columns.Bound(c => c.Genre);
             columns.Bound(c => c.Price);
             columns.Bound(c => c.Rating);

@@ -34,4 +34,5 @@ public class Movie
     [Display(Name = "Director")]
     [UIHint("DirectorEditor")]
     public int? DirectorId { get; set; }
+
 }
