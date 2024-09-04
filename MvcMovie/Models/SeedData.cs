@@ -60,25 +60,29 @@ public class SeedData
                 {
                     Name = "When Harry Met Sally Poster",
                     Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\whms.jpg",
-                    Description = "The movie poster for When Harry Met Sally"
+                    Description = "The movie poster for When Harry Met Sally",
+                    MovieId = 85
                 },
                 new Photo
                 {
                     Name = "Ghostbusters Poster",
                     Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\gb.jpg",
-                    Description = "The movie poster for Ghostbusters"
+                    Description = "The movie poster for Ghostbusters",
+                    MovieId = 86
                 },
                 new Photo
                 {
                     Name = "Ghostbusters II Poster",
                     Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\gb2.jpg",
-                    Description = "The movie poster for Ghostbusters II"
+                    Description = "The movie poster for Ghostbusters II",
+                    MovieId = 87
                 },
                 new Photo
                 {
                     Name = "Rio Bravo Poster",
                     Path = "C:\\Users\\nramsey-az\\Desktop\\MvcMovie\\MvcMovie\\wwwroot\\Photos\\rb.jpg",
-                    Description = "The movie poster for Rio Bravo"
+                    Description = "The movie poster for Rio Bravo",
+                    MovieId = 88
                 }
             );
             context.SaveChanges();

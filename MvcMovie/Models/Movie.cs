@@ -35,4 +35,7 @@ public class Movie
     [UIHint("DirectorEditor")]
     public int? DirectorId { get; set; }
 
+    public int? PhotoId { get; set; }
+    public Photo? PosterPhoto { get; set; }
+
 }

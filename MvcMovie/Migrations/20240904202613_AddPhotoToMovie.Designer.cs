@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MvcMovie.Data;
 
@@ -11,9 +12,11 @@ using MvcMovie.Data;
 namespace MvcMovie.Migrations
 {
     [DbContext(typeof(MvcMovieContext))]
-    partial class MvcMovieContextModelSnapshot : ModelSnapshot
+    [Migration("20240904202613_AddPhotoToMovie")]
+    partial class AddPhotoToMovie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,12 +85,6 @@ namespace MvcMovie.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<int?>("PhotoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("PosterPhotoPhotoId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
 
@@ -105,8 +102,6 @@ namespace MvcMovie.Migrations
                         .HasColumnType("nvarchar(60)");
 
                     b.HasKey("MovieId");
-
-                    b.HasIndex("PosterPhotoPhotoId");
 
                     b.ToTable("Movie");
                 });
@@ -136,16 +131,21 @@ namespace MvcMovie.Migrations
 
                     b.HasKey("PhotoId");
 
+                    b.HasIndex("MovieId");
+
                     b.ToTable("Photo");
+                });
+
+            modelBuilder.Entity("MvcMovie.Models.Photo", b =>
+                {
+                    b.HasOne("MvcMovie.Models.Movie", null)
+                        .WithMany("Photos")
+                        .HasForeignKey("MovieId");
                 });
 
             modelBuilder.Entity("MvcMovie.Models.Movie", b =>
                 {
-                    b.HasOne("MvcMovie.Models.Photo", "PosterPhoto")
-                        .WithMany()
-                        .HasForeignKey("PosterPhotoPhotoId");
-
-                    b.Navigation("PosterPhoto");
+                    b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618
         }
